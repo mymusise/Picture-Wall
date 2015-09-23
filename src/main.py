@@ -54,7 +54,7 @@ def Combines(original_im):
 
 
 def main():
-    im = Image.open('../resource/test2.png')
+    im = Image.open('../resource/test1.png')
     im = Combines(im)
     im.show()
     pass
