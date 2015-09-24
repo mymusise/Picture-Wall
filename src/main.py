@@ -5,7 +5,6 @@ Goble define
 Pixel_Byte_Define = 20
 
 
-
 def Combines(original_im):
 	original_x,original_y = original_im.size
 	'''
@@ -40,7 +39,7 @@ def Combines(original_im):
 			get a image after Calculate
 			'''
 			small_img = Calculate(small_img)
-      
+
 			'''
 			paste the ok image to current area
 			'''

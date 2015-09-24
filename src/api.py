@@ -7,14 +7,23 @@ return the processed image
 def Calculate(image):
 	# image = image.rotate(180)
 	mean = Calculate_Color(image)
-	mask_image = Image.new("RGBA",image.size,mean)
-	base_image = Image.open("../resource/test1.png").resize(image.size)
+	base_image = MatchImage(image)
 	'''
-		merge image 
+		Cheating!merge image with original image
 	'''
 	result = Image.blend(base_image,image,0.4)
 	return result
-	
+
+'''
+match a image which like most
+'''
+def MatchImage(image):
+	'''
+		now is just a test
+	'''
+	return Image.open("../resource/test1.png").resize(image.size)
+	 
+
 def Calculate_Color(image):
 	r_mean=0
 	g_mean=0
