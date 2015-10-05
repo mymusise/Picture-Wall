@@ -24,6 +24,7 @@ def Combines(original_im):
 								p_x*small_x,
 								p_y*small_y
 							 )
+			print (p_x,p_y)
 			'''
 			crop current area
 			'''
@@ -38,7 +39,7 @@ def Combines(original_im):
 			'''
 			get a image after Calculate
 			'''
-			small_img = Calculate(small_img)
+			small_img = Calculate(small_img,(p_x,p_y))
 
 			'''
 			paste the ok image to current area
@@ -51,7 +52,7 @@ def main():
 	im = Image.open('../resource/test3.jpg').convert("RGBA")
 	im = Combines(im)
 	im.show()
-	pass
+	# im.save('../../temp.jpg')
 
 
 def test():

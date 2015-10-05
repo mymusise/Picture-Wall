@@ -19,12 +19,7 @@ def getRandomName(name_length):
 
 class BingSpider():
 	urls=[
-			image_url.cartoon['purple'],
-			image_url.cartoon['pink'],
-			image_url.cartoon['brown'],
-			image_url.cartoon['black'],
-			image_url.cartoon['white'],
-			image_url.cartoon['grey']
+			image_url.lufei['red']
 		]
 	driver = webdriver.Firefox()
 	load_page_length = 2
@@ -54,7 +49,7 @@ class BingSpider():
 				img_file = Image.open(StringIO.StringIO(image_data))
 				url = self.driver.current_url
 				color = url[url.find("FGcls_")+6:url.find("&",url.find("FGcls_"))].lower()
-				img_file.save('../resource/img.bing.com/cartoon/'+color+'/'+getRandomName(15)+'.jpg')
+				img_file.save('../resource/img.bing.com/lufei/'+color+'/'+getRandomName(15)+'.jpg')
 			except:
 				pass
 
