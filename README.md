@@ -1,5 +1,5 @@
 # Picture-Wall
-This is a project that generate a picture by many small picture 
+This is a project that generate a picture by many small picture.
 
 # Requirment
 PIL library
