@@ -35,7 +35,7 @@ test_matrix2=[
 
 def Calculate(image,coord):
 	# image = image.rotate(180)
-	# mean = Calculate_Color(image)
+	mean = Calculate_Color(image)
 	base_image = MatchImage(image)
 	'''
 		Cheating!merge image with original image
