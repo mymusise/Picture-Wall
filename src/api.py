@@ -73,31 +73,49 @@ def Rgb2Hsv(rgb):
 		h+=360
 	return (h,s,v)
 
-def Hus2Color(h):
-	if 0<h<=15 or 345<h<=360:
-		return 'red'
-	elif 15<h<=45:
-		return 'orange'
-	elif 45<h<=75:
-		return 'yellow'
-	elif 75<h<=105:
-		return 'green'
-	elif 105<h<=135:
-		return 'green'
-	elif 135<h<=165:
-		return 'teal'
-	elif 165<h<=195:
-		return 'teal'
-	elif 195<h<=225:
-		return 'bule'
-	elif 225<h<=255:
-		return 'bule'
-	elif 255<h<=285:
-		return 'purple'
-	elif 285<h<=315:
-		return 'purple'
-	elif 315<h<=345:
-		return 'pink'
+def Hus2Color(hsv):
+	'''
+		is black?
+	'''
+	if hsv[2]<=45:
+		return 'black'
+	'''
+		is gray or white
+	'''
+	elif hsv[1]<=45:
+		if hsv[2]<=220:
+			return 'gray'
+		elif 220<hsv[2]:
+			return 'white'
+
+	'''
+		is red green bule ....?>_<
+	'''
+	elif 45<hsv[1]:
+		if 0<hsv[0]<=15 or 345<hsv[0]<=360:
+			return 'red'
+		elif 15<hsv[0]<=45:
+			return 'orange'
+		elif 45<hsv[0]<=75:
+			return 'yellow'
+		elif 75<hsv[0]<=105:
+			return 'green'
+		elif 105<hsv[0]<=135:
+			return 'green'
+		elif 135<hsv[0]<=165:
+			return 'teal'
+		elif 165<hsv[0]<=195:
+			return 'teal'
+		elif 195<hsv[0]<=225:
+			return 'bule'
+		elif 225<hsv[0]<=255:
+			return 'bule'
+		elif 255<hsv[0]<=285:
+			return 'purple'
+		elif 285<hsv[0]<=315:
+			return 'purple'
+		elif 315<hsv[0]<=345:
+			return 'pink'
 
 def Sv2Color(s,v):
 	pass
