@@ -6,6 +6,10 @@ Calculate a image color flag value and
 
 return the processed image
 '''
+color_map =	{
+
+}
+
 test_matrix=[
 	(9,6),(10,6),
 	(9,7),(10,7),(11,7),
@@ -33,13 +37,18 @@ test_matrix2=[
 	(7,16),(8,16),(9,16),(10,16),(11,16),(12,16),(13,16)
 ]
 
+
+
 def Calculate(image,coord):
 	# image = image.rotate(180)
-	mean = Calculate_Color(image)
+	# mean = Calculate_Color(image)
+	color =  get_dominant_color(image)
+	print color
 	base_image = MatchImage(image)
 	'''
 		Cheating!merge image with original image
 	'''
+
 	if coord in test_matrix2:
 		result = Image.blend(base_image,image,0.95)
 	else :
@@ -49,6 +58,58 @@ def Calculate(image,coord):
 '''
 match a image which like most
 '''
+
+def Rgb2Hsv(rgb):
+	h=0
+	v=max(rgb)
+	s=float((v-min(rgb)))/v
+	if rgb[0]>rgb[1] and rgb[0]>rgb[2]:
+		h = float((rgb[1]-rgb[2]))/(v-min(rgb))*60		
+	elif rgb[1]>rgb[0] and rgb[1]>rgb[2]:
+		h = 120 + float((rgb[2]-rgb[0]))/(v-min(rgb))*60
+	elif rgb[2]>rgb[0] and rgb[2]>rgb[1]:
+		h = 240 + float((rgb[0]-rgb[1]))/(v-min(rgb))*60	
+	if h<0:
+		h+=360
+	return (h,s,v)
+
+def Hus2Color(h):
+	if 0<h<=15 or 345<h<=360:
+		return 'red'
+	elif 15<h<=45:
+		return 'orange'
+	elif 45<h<=75:
+		return 'yellow'
+	elif 75<h<=105:
+		return 'green'
+	elif 105<h<=135:
+		return 'green'
+	elif 135<h<=165:
+		return 'teal'
+	elif 165<h<=195:
+		return 'teal'
+	elif 195<h<=225:
+		return 'bule'
+	elif 225<h<=255:
+		return 'bule'
+	elif 255<h<=285:
+		return 'purple'
+	elif 285<h<=315:
+		return 'purple'
+	elif 315<h<=345:
+		return 'pink'
+
+def Sv2Color(s,v):
+	pass
+
+def Get_Rgb_max(rgb):
+	if rgb[0]>rgb[1] and rgb[0]>rgb[2]:
+		return 'r'
+	elif rgb[1]>rgb[0] and rgb[1]>rgb[2]:
+		return 'g'
+	elif rgb[0]>rgb[1] and rgb[2]>rgb[1]:
+		return 'b'
+
 def MatchImage(image):
 	'''
 		now is just a test
@@ -95,15 +156,11 @@ def get_dominant_color(image):
         if a == 0:
             continue
         saturation = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)[1]
-        y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
-        y = (y - 16.0) / (235 - 16)
-        #hu lue gao liang se
-        if y > 0.9:
-            continue
-        # Calculate the score, preferring highly saturated colors.
-        # Add 0.1 to the saturation so we don't completely ignore grayscale
-        # colors by multiplying the count by zero, but still give them a low
-        # weight.
+        # y = min(abs(r * 2104 + g * 4130 + b * 802 + 4096 + 131072) >> 13, 235)
+        # y = (y - 16.0) / (235 - 16)
+        # #hu lue gao liang se
+        # if y > 0.9:
+        #     continue
         score = (saturation + 0.1) * count
         if score > max_score:
             max_score = score
@@ -111,4 +168,5 @@ def get_dominant_color(image):
     return dominant_color
 
 
-getRandomImage('../resource/img.bing.com/lufei')
+# getRandomImage('../resource/img.bing.com/lufei')
+print Rgb2Hsv((255,0,11))
