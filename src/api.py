@@ -42,15 +42,12 @@ test_matrix2=[
 def Calculate(image,coord):
 	# image = image.rotate(180)
 	# mean = Calculate_Color(image)
-	color =  get_dominant_color(image)
-	print color
-	base_image = MatchImage(image)
+	base_image = MatchImage(image,'cartoon')
 	'''
 		Cheating!merge image with original image
 	'''
-
 	if coord in test_matrix2:
-		result = Image.blend(base_image,image,0.95)
+		result = Image.blend(base_image,image,0.85)
 	else :
 		result = Image.blend(base_image,image,0.75)
 	return result
@@ -58,6 +55,16 @@ def Calculate(image,coord):
 '''
 match a image which like most
 '''
+def MatchImage(image,theme):
+	color =  GetImageColor(image)
+	print color
+	return getRandomImage('../resource/img.bing.com/'+theme+'/',color).resize(image.size)
+
+def GetImageColor(image):
+	rgb = GetImageRgb(image)
+	hsv = Rgb2Hsv(rgb)
+	return Hus2Color(hsv)
+
 
 def Rgb2Hsv(rgb):
 	h=0
@@ -79,19 +86,12 @@ def Hus2Color(hsv):
 	'''
 	if hsv[2]<=45:
 		return 'black'
-	'''
-		is gray or white
-	'''
-	elif hsv[1]<=45:
+	elif hsv[1]<=45: #is gray or white
 		if hsv[2]<=220:
 			return 'gray'
 		elif 220<hsv[2]:
 			return 'white'
-
-	'''
-		is red green bule ....?>_<
-	'''
-	elif 45<hsv[1]:
+	elif 45<hsv[1]: #is red green bule ....?>_<
 		if 0<hsv[0]<=15 or 345<hsv[0]<=360:
 			return 'red'
 		elif 15<hsv[0]<=45:
@@ -117,8 +117,7 @@ def Hus2Color(hsv):
 		elif 315<hsv[0]<=345:
 			return 'pink'
 
-def Sv2Color(s,v):
-	pass
+
 
 def Get_Rgb_max(rgb):
 	if rgb[0]>rgb[1] and rgb[0]>rgb[2]:
@@ -128,11 +127,7 @@ def Get_Rgb_max(rgb):
 	elif rgb[0]>rgb[1] and rgb[2]>rgb[1]:
 		return 'b'
 
-def MatchImage(image):
-	'''
-		now is just a test
-	'''
-	return getRandomImage('../resource/img.bing.com/lufei').resize(image.size)
+
 	 
 
 def Calculate_Color(image):
@@ -151,10 +146,10 @@ def Calculate_Color(image):
 	b_mean/=x*y
 	return (r_mean,g_mean,b_mean)
 
-def getRandomImage(dir_url):
+def getRandomImage(dir_url,color):
 	colors =  os.listdir(dir_url)
 	colors_number = random.randrange(len(colors))
-	pic_dri = os.path.join(dir_url,colors[colors_number])
+	pic_dri = os.path.join(dir_url,color)
 	imgs_dri = os.listdir(pic_dri)
 	imgs_number = random.randrange(len(imgs_dri))
 	img_dri = os.path.join(pic_dri,imgs_dri[imgs_number])
@@ -163,7 +158,7 @@ def getRandomImage(dir_url):
 
 
 import colorsys
-def get_dominant_color(image):
+def GetImageRgb(image):
 
     image = image.convert('RGBA')
     image.thumbnail((200, 200))
