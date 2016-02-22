@@ -15,3 +15,13 @@ just run the main.py
 </pre>
 
 Then you can see what happend!
+
+##Before
+
+![before](./resource/test4.jpg)
+
+##After
+
+![after](./resource/temp.jpg)
+
+#Hope guys like~

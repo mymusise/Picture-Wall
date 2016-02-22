@@ -49,10 +49,10 @@ def Combines(original_im):
 
 
 def main():
-	im = Image.open('../resource/test3.jpg').convert("RGBA")
+	im = Image.open('../resource/test4.jpg').convert("RGBA")
 	im = Combines(im)
 	im.show()
-	# im.save('../../temp.jpg')
+	im.save('../../temp.jpg')
 
 
 def test():
